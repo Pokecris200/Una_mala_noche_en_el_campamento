@@ -10,6 +10,9 @@ public class PlayerBehaviour : MonoBehaviour
     Vector2 horizontalInput;
     [SerializeField] private Transform cameraPosition;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
     [Header("Sprinting")]
     [SerializeField] private float maxStamina = 50f; //Estamina Maxima
     [SerializeField] private float stamina = 50f; //Estamina actual
@@ -32,6 +35,7 @@ public class PlayerBehaviour : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         weaponTransform = weapon.GetComponent<Transform>();
         weaponCollider = weapon.GetComponent<Collider>();
+        animator = GetComponent<Animator>();
     }
 
     void OnMove(InputValue value)
@@ -70,6 +74,19 @@ public class PlayerBehaviour : MonoBehaviour
     private void Update()
     {
         SprintingInstructions();
+        UpdateAnimations();
+    }
+
+    void UpdateAnimations()
+    {
+        if (animator == null) return;
+
+        float currentSpeed = horizontalInput.magnitude * sprint;
+        bool isMoving = horizontalInput.sqrMagnitude > 0.01f;
+
+        animator.SetFloat("Speed", currentSpeed);
+        animator.SetBool("isMoving", isMoving);
+        animator.SetBool("isAtacking", isAttacking);
     }
 
 
