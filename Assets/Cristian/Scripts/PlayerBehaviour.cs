@@ -177,11 +177,6 @@ public class PlayerBehaviour : MonoBehaviour
         Collider ardillaCol = ardilla.GetComponent<Collider>();
         Collider playerCol = GetComponent<Collider>();
 
-        /*if (ardillaCol != null && playerCol != null)
-        {
-            Physics.IgnoreCollision(ardillaCol, playerCol, true);
-        }*/
-
         if (ardillaCol != null) ardillaCol.enabled = true;
 
         if (ardillaRb != null)
