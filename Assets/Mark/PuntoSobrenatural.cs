@@ -56,6 +56,11 @@ public class PuntoSobrenatural : MonoBehaviour
         return listaPuntos.Count > 0;
         //con la lista en cero se activa la condición de puntos libres
     }
+    public void Reservar()
+    {
+        estaLibre = false;
+        Debug.Log($"{name} reservo un punto, puntos libres:{ContadorDeLibres()}");
+    }
     public void Reclamar()
     {
         estaLibre = false;
@@ -75,17 +80,30 @@ public class PuntoSobrenatural : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (!estaLibre)
-        {
-            return;
-        }
         OcultistasCtrl ocultista = other.GetComponentInParent<OcultistasCtrl>();
         if (ocultista !=null && !ocultista.llego)
         {
-            Reclamar();
+            if (!ocultista.ReservoTalPunto(this))
+            {
+                Destroy(ocultista.gameObject);
+                return;
+            }
             ocultista.LlegadaAlPunto(this);
 
         }
+
+
+        //if (!estaLibre)
+        //{
+        //    return;
+        //}
+        //OcultistasCtrl ocultista = other.GetComponentInParent<OcultistasCtrl>();
+        //if (ocultista !=null && !ocultista.llego)
+        //{
+        //    Reclamar();
+        //    ocultista.LlegadaAlPunto(this);
+
+        //}
     }
 
 

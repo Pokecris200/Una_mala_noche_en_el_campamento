@@ -18,9 +18,13 @@ public class OcultistasCtrl : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
+        objetivoRit.Reservar();
         if (!agente.isOnNavMesh)
         {
             Debug.LogError("Sin NavMesh");
+            objetivoRit.Liberar();
+            Destroy(gameObject);
             return;
 
         }
@@ -38,24 +42,46 @@ public class OcultistasCtrl : MonoBehaviour
         }
         
     }
+    public bool ReservoTalPunto(PuntoSobrenatural punto)
+    {
+        return objetivoRit == punto;
+
+    }
     public void LlegadaAlPunto(PuntoSobrenatural punto)
     {
-        if (llego) return;
+        if (llego)
+        {
+            return;
+        }
+        if (objetivoRit != punto)
+        {
+            Debug.LogWarning($"{name}: llego a un punto");
+            Destroy(gameObject);
+            return;
+        }
         llego = true;
-        objetivoRit = punto;
-
-        if (agente != null && agente.isOnNavMesh)
+        if (agente !=null && agente.isOnNavMesh)
         {
             agente.isStopped = true;
+            Debug.Log($"{name} llego a {punto.name}");
 
         }
-        Debug.Log($"{name} llego a {punto.name }");
+        //if (llego) return;
+        //llego = true;
+        //objetivoRit = punto;
+
+        //if (agente != null && agente.isOnNavMesh)
+        //{
+        //    agente.isStopped = true;
+
+        //}
+        //Debug.Log($"{name} llego a {punto.name }");
         
 
     }
     private void OnDestroy()
     {
-        if (llego && objetivoRit !=null)
+        if (objetivoRit !=null)
         {
             objetivoRit.Liberar();
 
