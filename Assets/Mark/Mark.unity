@@ -134,75 +134,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2583521046620369466, guid: 128662cf1779bb34cae0c3cdf435473b, type: 3}
   m_PrefabInstance: {fileID: 3121295561388212921}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &918329548
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -8.57816
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.8499999
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -6.9641027
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.27415323
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.961686
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -211.823
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
-      propertyPath: m_Name
-      value: Ocultista@Walking
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: f88a7fa0d4ec775489cc58b1fe0aa22a, type: 3}
 --- !u!4 &1058064728 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6312517060223532488, guid: 128662cf1779bb34cae0c3cdf435473b, type: 3}
@@ -544,6 +475,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: badd7363d2d78da409e94b6a633f0755, type: 3}
+--- !u!1001 &1142369248846363856
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8579559512414132634, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579559512414132634, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.06
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579559512414132634, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579559512414132634, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: -0.36470175
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579559512414132634, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.008124916
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579559512414132634, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.9310874
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579559512414132634, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.0017283657
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579559512414132634, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0.155
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579559512414132634, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 222.779
+      objectReference: {fileID: 0}
+    - target: {fileID: 8579559512414132634, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -0.939
+      objectReference: {fileID: 0}
+    - target: {fileID: 8960869438500160288, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
+      propertyPath: m_Name
+      value: Ocultista@Two Handed Sword Death
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b8010c15f3198d34d85f4e3cd3e043bf, type: 3}
 --- !u!1001 &1861515507421129424
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -753,4 +741,4 @@ SceneRoots:
   - {fileID: 1861515507421129424}
   - {fileID: 241594070158519852}
   - {fileID: 3121295561388212921}
-  - {fileID: 918329548}
+  - {fileID: 1142369248846363856}
