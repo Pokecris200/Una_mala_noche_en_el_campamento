@@ -80,10 +80,10 @@ public class PuntoSobrenatural : MonoBehaviour
             return;
         }
         OcultistasCtrl ocultista = other.GetComponentInParent<OcultistasCtrl>();
-        if (ocultista !=null && !ocultista.Llego)
+        if (ocultista !=null && !ocultista.llego)
         {
             Reclamar();
-           // ocultista.LlegoAlPunto(this);
+            ocultista.LlegadaAlPunto(this);
 
         }
     }
