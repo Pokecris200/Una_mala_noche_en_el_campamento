@@ -7,6 +7,8 @@ public class PuntoSobrenatural : MonoBehaviour
     //lista para verificar los puntos
 
     public static readonly List<PuntoSobrenatural> listaPuntos = new List<PuntoSobrenatural>();
+
+    public bool completado = false;
     //no se como funciona, preguntar
     private void OnEnable()
     {
@@ -85,25 +87,26 @@ public class PuntoSobrenatural : MonoBehaviour
         {
             if (!ocultista.ReservoTalPunto(this))
             {
-                Destroy(ocultista.gameObject);
                 return;
             }
             ocultista.LlegadaAlPunto(this);
 
         }
+    }
 
+    // Método estático para verificar si los 6 puntos terminaron el ritual:
+    public static bool TodosCompletados()
+    {
+        if (listaPuntos.Count == 0) return false;
 
-        //if (!estaLibre)
-        //{
-        //    return;
-        //}
-        //OcultistasCtrl ocultista = other.GetComponentInParent<OcultistasCtrl>();
-        //if (ocultista !=null && !ocultista.llego)
-        //{
-        //    Reclamar();
-        //    ocultista.LlegadaAlPunto(this);
-
-        //}
+        foreach (var punto in listaPuntos)
+        {
+            if (!punto.completado)
+            {
+                return false;
+            }
+        }
+        return true; // Todos los puntos de la escena tienen a su ocultista posicionado
     }
 
 

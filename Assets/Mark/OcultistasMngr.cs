@@ -30,8 +30,7 @@ public class OcultistasMngr : MonoBehaviour
             yield return new WaitForSeconds(spawnInterval);
             if (PuntoSobrenatural.PuntosOcupados()||PuntoSobrenatural.ObtenerPuntoLibre()==null)
             {
-                detenerSpawn = true;
-                yield break;
+                continue;
 
             }
             Transform puntoElegido = puntosDeSpawn[Random.Range(0, puntosDeSpawn.Count)];
