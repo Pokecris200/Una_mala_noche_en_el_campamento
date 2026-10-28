@@ -87,6 +87,7 @@ public class OcultistasCtrl : MonoBehaviour
             return;
         }
         llego = true;
+        punto.completado = true;
         if (agente !=null && agente.isOnNavMesh)
         {
             agente.isStopped = true;
@@ -97,7 +98,11 @@ public class OcultistasCtrl : MonoBehaviour
         {
             animator.SetFloat(ParamSpeed, 0f); // Regresa a Praying
         }
-        
+        if (PuntoSobrenatural.TodosCompletados())
+        {
+            InGameManager.Instance.DispararGameOver();
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -113,7 +118,7 @@ public class OcultistasCtrl : MonoBehaviour
     {
         Debug.Log("Recibi Daño");
         vida -= cantidad;
-        AudioManager.Instance.Play("Hit");
+        //AudioManager.Instance.Play("Hit");
 
         if (animator != null)
         {

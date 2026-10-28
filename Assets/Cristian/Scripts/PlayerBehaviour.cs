@@ -221,4 +221,9 @@ public class PlayerBehaviour : MonoBehaviour
         ardilla = null;
     }
 
+    public void Morir()
+    {
+
+    }
+
 }

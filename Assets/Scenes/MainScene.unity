@@ -288,7 +288,7 @@ Transform:
   m_GameObject: {fileID: 70011872}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 29.3, y: 0, z: 9.6}
+  m_LocalPosition: {x: 30.28, y: 1, z: 9.42}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -541,7 +541,7 @@ Transform:
   m_GameObject: {fileID: 97150595}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -24, y: 0, z: -21.4}
+  m_LocalPosition: {x: -23.58, y: 1, z: -21.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1777,7 +1777,7 @@ Transform:
   m_GameObject: {fileID: 526189684}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.9, y: 0, z: 9.6}
+  m_LocalPosition: {x: -30.9, y: 1, z: 9.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3880,7 +3880,7 @@ Transform:
   m_GameObject: {fileID: 1052061694}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 23.2, y: 0, z: -20.6}
+  m_LocalPosition: {x: 23.72, y: 1, z: -21.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4118,7 +4118,7 @@ Transform:
   m_GameObject: {fileID: 1141185285}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.4, y: 0, z: -6.4}
+  m_LocalPosition: {x: -31.98, y: 1, z: -7.62}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4676,6 +4676,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2240169723809444574, guid: 5122a16389024df4e92c860bb5c7d72c, type: 3}
+      propertyPath: m_TagString
+      value: Arma
+      objectReference: {fileID: 0}
     - target: {fileID: 7217220916326347298, guid: 5122a16389024df4e92c860bb5c7d72c, type: 3}
       propertyPath: speed
       value: 5
@@ -4706,7 +4710,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7866953827205672494, guid: 5122a16389024df4e92c860bb5c7d72c, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 18.96
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7866953827205672494, guid: 5122a16389024df4e92c860bb5c7d72c, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4714,7 +4718,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7866953827205672494, guid: 5122a16389024df4e92c860bb5c7d72c, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 18.704
+      value: -1.1
       objectReference: {fileID: 0}
     - target: {fileID: 7866953827205672494, guid: 5122a16389024df4e92c860bb5c7d72c, type: 3}
       propertyPath: m_LocalRotation.w
@@ -6029,9 +6033,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OcultistasMngr
   OcultistaPrefab: {fileID: 3485000199341673758, guid: 65a4f8dce8ba6e94f8d2d203e92a1733, type: 3}
-  spawnInterval: 3
+  spawnInterval: 1
   puntosDeSpawn:
   - {fileID: 1940226486}
+  - {fileID: 70011873}
+  - {fileID: 1746774230}
+  - {fileID: 1052061695}
+  - {fileID: 526189685}
+  - {fileID: 1141185286}
+  - {fileID: 97150596}
 --- !u!4 &1694014178
 Transform:
   m_ObjectHideFlags: 0
@@ -6360,7 +6370,7 @@ Transform:
   m_GameObject: {fileID: 1746774229}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 30.2, y: 0, z: -6.9}
+  m_LocalPosition: {x: 31.04, y: 1, z: -7.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6986,7 +6996,7 @@ Transform:
   m_GameObject: {fileID: 1940226485}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 19.6, y: 0, z: 23.8}
+  m_LocalPosition: {x: 20.68, y: 1, z: 23.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
