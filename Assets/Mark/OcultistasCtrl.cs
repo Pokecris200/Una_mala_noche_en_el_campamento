@@ -111,6 +111,7 @@ public class OcultistasCtrl : MonoBehaviour
     }
     private void RecibirDano(float cantidad)
     {
+        Debug.Log("Recibi Daño");
         vida -= cantidad;
         AudioManager.Instance.Play("Hit");
 
