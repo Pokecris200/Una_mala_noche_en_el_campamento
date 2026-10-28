@@ -10,6 +10,9 @@ public class PlayerBehaviour : MonoBehaviour
     Vector2 horizontalInput;
     [SerializeField] private Transform cameraPosition;
 
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
     [Header("Sprinting")]
     [SerializeField] private float maxStamina = 50f; //Estamina Maxima
     [SerializeField] private float stamina = 50f; //Estamina actual
@@ -32,6 +35,7 @@ public class PlayerBehaviour : MonoBehaviour
         rb = gameObject.GetComponent<Rigidbody>();
         weaponTransform = weapon.GetComponent<Transform>();
         weaponCollider = weapon.GetComponent<Collider>();
+        animator = GetComponent<Animator>();
     }
 
     void OnMove(InputValue value)
@@ -56,20 +60,51 @@ public class PlayerBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 moveDirection = (transform.right * horizontalInput.x) + (transform.forward * horizontalInput.y);
+        Vector3 targetVelocity = Vector3.zero;
 
-        if (moveDirection.magnitude > 1f)
+        if (horizontalInput.sqrMagnitude > 0.01f && cameraPosition != null)
         {
-            moveDirection.Normalize();
+            // Obtener forward y right de la cámara proyectados sobre el plano horizontal
+            Vector3 camForward = cameraPosition.forward;
+            camForward.y = 0f;
+            camForward.Normalize();
+
+            Vector3 camRight = cameraPosition.right;
+            camRight.y = 0f;
+            camRight.Normalize();
+
+            // Vector de dirección deseado
+            Vector3 moveDirection = (camRight * horizontalInput.x) + (camForward * horizontalInput.y);
+            if (moveDirection.magnitude > 1f)
+            {
+                moveDirection.Normalize();
+            }
+
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.fixedDeltaTime);
+
+            targetVelocity = moveDirection * speed * sprint;
         }
 
-        Vector3 targetVelocity = moveDirection * speed * sprint;
         rb.linearVelocity = new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z);
     }
 
     private void Update()
     {
         SprintingInstructions();
+        UpdateAnimations();
+    }
+
+    void UpdateAnimations()
+    {
+        if (animator == null) return;
+
+        float currentSpeed = horizontalInput.magnitude * sprint;
+        bool isMoving = horizontalInput.sqrMagnitude > 0.01f;
+
+        animator.SetFloat("Speed", currentSpeed);
+        animator.SetBool("isMoving", isMoving);
+        animator.SetBool("isAtacking", isAttacking);
     }
 
 
@@ -110,40 +145,39 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (!isAttacking)
         {
-            StartCoroutine(SwingWeaponRoutine());
+            // Alinear al personaje con el frente de la cámara
+            if (cameraPosition != null)
+            {
+                Vector3 camForward = cameraPosition.forward;
+                camForward.y = 0f;
+                if (camForward.sqrMagnitude > 0.001f)
+                {
+                    transform.rotation = Quaternion.LookRotation(camForward);
+                }
+            }
+
+            isAttacking = true;
         }
     }
 
-    private IEnumerator SwingWeaponRoutine()
+    // Llamar justo cuando la sartén empieza el recorrido de ataque
+    public void EnableWeaponTrigger()
     {
         isAttacking = true;
-        weaponCollider.isTrigger = true;
-
-        Quaternion initialRotation = weaponTransform.localRotation;
-        Quaternion targetRotation = initialRotation * Quaternion.Euler(45, 0, 0);
-
-        // 1. Rotar hacia el objetivo
-        float elapsed = 0f;
-        while (elapsed < duration)
+        if (weaponCollider != null)
         {
-            weaponTransform.localRotation = Quaternion.Slerp(initialRotation, targetRotation, elapsed / duration);
-            elapsed += Time.deltaTime;
-            yield return null;
+            weaponCollider.isTrigger = true;
         }
-        weaponTransform.localRotation = targetRotation;
+    }
 
-        // 2. Regresar a la posición original
-        elapsed = 0f;
-        while (elapsed < duration)
-        {
-            weaponTransform.localRotation = Quaternion.Slerp(targetRotation, initialRotation, elapsed / duration);
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-        weaponTransform.localRotation = initialRotation;
-
-        weaponCollider.isTrigger = false;
+    // Llamar cuando termina de dar el golpe hacia adelante
+    public void DisableWeaponTrigger()
+    {
         isAttacking = false;
+        if (weaponCollider != null)
+        {
+            weaponCollider.isTrigger = false;
+        }
     }
 
     // Sección ataque de ardilla
