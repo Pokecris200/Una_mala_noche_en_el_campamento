@@ -42,18 +42,24 @@ public class PlayerBehaviour : MonoBehaviour
 
     void OnMove(InputValue value)
     {
+        if (!enabled || estaMuerto || Time.timeScale == 0f)
+        {
+            horizontalInput = Vector2.zero;
+            return;
+        }
         horizontalInput = value.Get<Vector2>();
     }
 
     void OnAttack(InputValue value)
     {
+        if (!enabled || estaMuerto || Time.timeScale == 0f) return;
         AttackInstructions();
     }
 
-    void OnJump(InputValue value)
+    /*void OnJump(InputValue value)
     {
         ShootSquirrell(throwForce);
-    }
+    }*/
 
     void FixedUpdate()
     {

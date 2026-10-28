@@ -123,8 +123,8 @@ public class InGameManager : MonoBehaviour
     {
         isPaused = true;
         if (pausePanel != null) pausePanel.SetActive(true);
-        Time.timeScale = 0f; 
-
+        Time.timeScale = 0f;
+        if (jugador != null) jugador.enabled = false;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
     }
@@ -133,16 +133,19 @@ public class InGameManager : MonoBehaviour
     {
         isPaused = false;
         if (pausePanel != null) pausePanel.SetActive(false);
-        Time.timeScale = 1f; 
-
+        Time.timeScale = 1f;
+        if (jugador != null) jugador.enabled = true;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
 
     public void IrAlMenuPrincipal()
     {
-        Time.timeScale = 1f; 
-        UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
+        Debug.Log("Cargando MainMenu...");
+        Time.timeScale = 1f;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 
 }
