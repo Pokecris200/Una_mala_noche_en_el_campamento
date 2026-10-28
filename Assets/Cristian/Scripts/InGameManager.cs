@@ -99,6 +99,7 @@ public class InGameManager : MonoBehaviour
         {
             panelVictoria.SetActive(true);
         }
+        Time.timeScale = 0f;
     }
 
     public void Pausar()
@@ -126,4 +127,5 @@ public class InGameManager : MonoBehaviour
         Time.timeScale = 1f; 
         UnityEngine.SceneManagement.SceneManager.LoadScene("MainMenu");
     }
+
 }
