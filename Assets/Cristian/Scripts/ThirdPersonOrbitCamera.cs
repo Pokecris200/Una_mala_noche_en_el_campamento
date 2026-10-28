@@ -32,7 +32,7 @@ public class ThirdPersonOrbitCamera : MonoBehaviour
         transform.position = target.position + targetOffset;
 
         // Leer movimiento del mouse con el nuevo Input System
-        if (Mouse.current != null)
+        if (Time.timeScale > 0f && Mouse.current != null)
         {
             Vector2 delta = Mouse.current.delta.ReadValue();
             yaw += delta.x * sensitivityX * 0.05f;
