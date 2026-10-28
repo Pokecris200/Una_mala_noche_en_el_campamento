@@ -1,0 +1,225 @@
+using System.Collections;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class PlayerBehaviour : MonoBehaviour
+{
+    private Rigidbody rb;
+    [SerializeField] private float speed = 10f;
+    private float sprint = 1f;
+    Vector2 horizontalInput;
+    [SerializeField] private Transform cameraPosition;
+
+    [Header("Animation")]
+    [SerializeField] private Animator animator;
+
+    [Header("Sprinting")]
+    [SerializeField] private float maxStamina = 50f; //Estamina Maxima
+    [SerializeField] private float stamina = 50f; //Estamina actual
+    [SerializeField] private float staminaDrain = 15f;    // Puntos de estamina gastados por segundo
+    [SerializeField] private float staminaRecovery = 10f;
+    [SerializeField] private bool running = false;
+
+    [Header("Attack")]
+    [SerializeField] private GameObject weapon;
+    private Transform weaponTransform;
+    private Collider weaponCollider;
+    [SerializeField] private float duration = 0.15f; // Tiempo que tarda en ir (y en volver)
+    private bool isAttacking = false;
+
+    [Header("Ardilla")]
+    [SerializeField] private GameObject ardilla;
+    [SerializeField] private float throwForce;
+    void Start()
+    {
+        rb = gameObject.GetComponent<Rigidbody>();
+        weaponTransform = weapon.GetComponent<Transform>();
+        weaponCollider = weapon.GetComponent<Collider>();
+        animator = GetComponent<Animator>();
+    }
+
+    void OnMove(InputValue value)
+    {
+        horizontalInput = value.Get<Vector2>();
+    }
+
+    void OnSprint(InputValue value)
+    {
+        running = value.isPressed;
+    }
+
+    void OnAttack(InputValue value)
+    {
+        AttackInstructions();
+    }
+
+    void OnJump(InputValue value)
+    {
+        ShootSquirrell(throwForce);
+    }
+
+    void FixedUpdate()
+    {
+        Vector3 targetVelocity = Vector3.zero;
+
+        if (horizontalInput.sqrMagnitude > 0.01f && cameraPosition != null)
+        {
+            // Obtener forward y right de la cámara proyectados sobre el plano horizontal
+            Vector3 camForward = cameraPosition.forward;
+            camForward.y = 0f;
+            camForward.Normalize();
+
+            Vector3 camRight = cameraPosition.right;
+            camRight.y = 0f;
+            camRight.Normalize();
+
+            // Vector de dirección deseado
+            Vector3 moveDirection = (camRight * horizontalInput.x) + (camForward * horizontalInput.y);
+            if (moveDirection.magnitude > 1f)
+            {
+                moveDirection.Normalize();
+            }
+
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 15f * Time.fixedDeltaTime);
+
+            targetVelocity = moveDirection * speed * sprint;
+        }
+
+        rb.linearVelocity = new Vector3(targetVelocity.x, rb.linearVelocity.y, targetVelocity.z);
+    }
+
+    private void Update()
+    {
+        SprintingInstructions();
+        UpdateAnimations();
+    }
+
+    void UpdateAnimations()
+    {
+        if (animator == null) return;
+
+        float currentSpeed = horizontalInput.magnitude * sprint;
+        bool isMoving = horizontalInput.sqrMagnitude > 0.01f;
+
+        animator.SetFloat("Speed", currentSpeed);
+        animator.SetBool("isMoving", isMoving);
+        animator.SetBool("isAtacking", isAttacking);
+    }
+
+
+    // Sección de Sprint del jugador
+    void SprintingInstructions()
+    {
+        bool isMoving = horizontalInput.sqrMagnitude > 0.01f;
+
+        if (running && stamina > 0f && isMoving)
+        {
+            sprint = 2f;
+            stamina -= staminaDrain * Time.deltaTime;
+
+            if (stamina <= 0f)
+            {
+                stamina = 0f;
+                sprint = 1f;
+            }
+        }
+        else
+        {
+            sprint = 1f;
+
+            if (stamina < maxStamina)
+            {
+                stamina += staminaRecovery * Time.deltaTime;
+                if (stamina > maxStamina)
+                {
+                    stamina = maxStamina;
+                }
+            }
+        }
+    }
+
+
+    // Seccion Ataque del jugador
+    void AttackInstructions()
+    {
+        if (!isAttacking)
+        {
+            // Alinear al personaje con el frente de la cámara
+            if (cameraPosition != null)
+            {
+                Vector3 camForward = cameraPosition.forward;
+                camForward.y = 0f;
+                if (camForward.sqrMagnitude > 0.001f)
+                {
+                    transform.rotation = Quaternion.LookRotation(camForward);
+                }
+            }
+
+            isAttacking = true;
+        }
+    }
+
+    // Llamar justo cuando la sartén empieza el recorrido de ataque
+    public void EnableWeaponTrigger()
+    {
+        isAttacking = true;
+        if (weaponCollider != null)
+        {
+            weaponCollider.isTrigger = true;
+        }
+    }
+
+    // Llamar cuando termina de dar el golpe hacia adelante
+    public void DisableWeaponTrigger()
+    {
+        isAttacking = false;
+        if (weaponCollider != null)
+        {
+            weaponCollider.isTrigger = false;
+        }
+    }
+
+    // Sección ataque de ardilla
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ardilla"))
+        {
+            ardilla = collision.gameObject;
+
+            if (ardilla.TryGetComponent<Rigidbody>(out Rigidbody ardillaRb))
+            {
+                ardillaRb.isKinematic = true;
+            }
+            if (ardilla.TryGetComponent<Collider>(out Collider ardillaCol))
+            {
+                ardillaCol.enabled = false;
+            }
+            ardilla.transform.SetParent(cameraPosition);
+            ardilla.transform.localPosition = new Vector3(-0.5f,-0.2f,1f);
+            ardilla.transform.rotation = Quaternion.identity;
+        }
+    }
+
+    private void ShootSquirrell(float localTrhowForce)
+    {
+        if (ardilla == null) return;
+
+        ardilla.transform.SetParent(null);
+
+        Rigidbody ardillaRb = ardilla.GetComponent<Rigidbody>();
+        Collider ardillaCol = ardilla.GetComponent<Collider>();
+        Collider playerCol = GetComponent<Collider>();
+
+        if (ardillaCol != null) ardillaCol.enabled = true;
+
+        if (ardillaRb != null)
+        {
+            ardillaRb.isKinematic = false;
+            ardillaRb.AddForce(cameraPosition.forward * localTrhowForce, ForceMode.Impulse);
+        }
+
+        ardilla = null;
+    }
+
+}
