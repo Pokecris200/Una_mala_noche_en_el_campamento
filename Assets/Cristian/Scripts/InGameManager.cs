@@ -33,10 +33,7 @@ public class InGameManager : MonoBehaviour
         // 2. Eliminar o matar al jugador
         if (jugador != null)
         {
-            // Si tu PlayerBehaviour tiene un método para morir, llámalo aquí:
-            // jugador.Morir();
-            // O directamente destruirlo / desactivarlo:
-            Destroy(jugador.gameObject);
+            jugador.Morir();
         }
 
         Debug.Log("¡Los 6 puntos fueron completados! Game Over.");
