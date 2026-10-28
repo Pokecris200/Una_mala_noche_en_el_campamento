@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float staminaDrain = 15f;    // Puntos de estamina gastados por segundo
     [SerializeField] private float staminaRecovery = 10f;
     [SerializeField] private bool running = false;
+    [SerializeField] private Image staminaBarImage;
 
     [Header("Attack")]
     [SerializeField] private GameObject weapon;
@@ -41,11 +43,6 @@ public class PlayerBehaviour : MonoBehaviour
     void OnMove(InputValue value)
     {
         horizontalInput = value.Get<Vector2>();
-    }
-
-    void OnSprint(InputValue value)
-    {
-        running = value.isPressed;
     }
 
     void OnAttack(InputValue value)
@@ -114,24 +111,28 @@ public class PlayerBehaviour : MonoBehaviour
     // Sección de Sprint del jugador
     void SprintingInstructions()
     {
+        if (Keyboard.current != null)
+        {
+            running = Keyboard.current.leftShiftKey.isPressed || Keyboard.current.rightShiftKey.isPressed;
+        }
+
         bool isMoving = horizontalInput.sqrMagnitude > 0.01f;
 
-        if (running && stamina > 0f && isMoving)
+        if (running && isMoving && stamina > 0f)
         {
             sprint = 2f;
             stamina -= staminaDrain * Time.deltaTime;
 
-            if (stamina <= 0f)
+            if (stamina < 0f)
             {
                 stamina = 0f;
-                sprint = 1f;
             }
         }
         else
         {
             sprint = 1f;
 
-            if (stamina < maxStamina)
+            if (!running && stamina < maxStamina)
             {
                 stamina += staminaRecovery * Time.deltaTime;
                 if (stamina > maxStamina)
@@ -139,6 +140,11 @@ public class PlayerBehaviour : MonoBehaviour
                     stamina = maxStamina;
                 }
             }
+        }
+
+        if (staminaBarImage != null && maxStamina > 0f)
+        {
+            staminaBarImage.fillAmount = stamina / maxStamina;
         }
     }
 

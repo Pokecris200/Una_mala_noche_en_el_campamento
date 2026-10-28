@@ -23,6 +23,7 @@ public class MouseLook : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0f) return;
         if (Mouse.current == null) return;
 
         Vector2 mouseDelta = Mouse.current.delta.ReadValue();
