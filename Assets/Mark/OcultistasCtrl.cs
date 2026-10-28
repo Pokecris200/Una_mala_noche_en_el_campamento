@@ -97,18 +97,7 @@ public class OcultistasCtrl : MonoBehaviour
         {
             animator.SetFloat(ParamSpeed, 0f); // Regresa a Praying
         }
-        //if (llego) return;
-        //llego = true;
-        //objetivoRit = punto;
-
-        //if (agente != null && agente.isOnNavMesh)
-        //{
-        //    agente.isStopped = true;
-
-        //}
-        //Debug.Log($"{name} llego a {punto.name }");
-
-
+        
     }
 
     private void OnTriggerEnter(Collider other)
