@@ -58,7 +58,7 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f;
         ChangeState(GameState.Gameplay);
-        SceneManager.LoadScene("MainMenu");
+        SceneManager.LoadScene("MainScene");
     }
 
     public void ResumeGame()

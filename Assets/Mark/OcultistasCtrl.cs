@@ -112,6 +112,7 @@ public class OcultistasCtrl : MonoBehaviour
     private void RecibirDano(float cantidad)
     {
         vida -= cantidad;
+        AudioManager.Instance.Play("Hit");
 
         if (animator != null)
         {
