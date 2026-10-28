@@ -3,9 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager Instance { get; private set; } 
-
-    public GameState CurrentState { get; private set; }
+    [SerializeField] private UIManager uiManager;
+    public static GameManager Instance { get; private set;}
+    public GameState CurrentState { get; private set;}
 
     GameState initialState;
 
