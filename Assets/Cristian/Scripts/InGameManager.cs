@@ -58,7 +58,24 @@ public class InGameManager : MonoBehaviour
 
     private void Update()
     {
-        if (partidaTerminada || gameOver) return;
+        // 1. Detectar si se presiona la tecla Escape con el nuevo Input System
+        if (Keyboard.current != null && Keyboard.current.escapeKey.wasPressedThisFrame)
+        {
+            if (!partidaTerminada && !gameOver)
+            {
+                if (isPaused)
+                {
+                    Reanudar();
+                }
+                else
+                {
+                    Pausar();
+                }
+            }
+        }
+
+        // 2. Si el juego está en pausa, o ya terminó, no avanzar el reloj de la partida
+        if (isPaused || partidaTerminada || gameOver) return;
 
         tiempoTranscurrido += Time.deltaTime;
 
