@@ -8,6 +8,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private float speed = 10f;
     private float sprint = 1f;
     Vector2 horizontalInput;
+    private bool estaMuerto = false;
     [SerializeField] private Transform cameraPosition;
 
     [Header("Animation")]
@@ -24,7 +25,6 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private GameObject weapon;
     private Transform weaponTransform;
     private Collider weaponCollider;
-    [SerializeField] private float duration = 0.15f; // Tiempo que tarda en ir (y en volver)
     private bool isAttacking = false;
 
     [Header("Ardilla")]
@@ -60,9 +60,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (estaMuerto) return;
+
         Vector3 targetVelocity = Vector3.zero;
 
-        if (horizontalInput.sqrMagnitude > 0.01f && cameraPosition != null)
+        if (!isAttacking && horizontalInput.sqrMagnitude > 0.01f && cameraPosition != null)
         {
             // Obtener forward y right de la cámara proyectados sobre el plano horizontal
             Vector3 camForward = cameraPosition.forward;
@@ -91,6 +93,7 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Update()
     {
+        if (estaMuerto) return;
         SprintingInstructions();
         UpdateAnimations();
     }
@@ -99,8 +102,8 @@ public class PlayerBehaviour : MonoBehaviour
     {
         if (animator == null) return;
 
-        float currentSpeed = horizontalInput.magnitude * sprint;
-        bool isMoving = horizontalInput.sqrMagnitude > 0.01f;
+        bool isMoving = !isAttacking && horizontalInput.sqrMagnitude > 0.01f;
+        float currentSpeed = isMoving ? horizontalInput.magnitude * sprint : 0f;
 
         animator.SetFloat("Speed", currentSpeed);
         animator.SetBool("isMoving", isMoving);
@@ -220,6 +223,35 @@ public class PlayerBehaviour : MonoBehaviour
         }
 
         ardilla = null;
+    }
+
+    public void Morir()
+    {
+        if (estaMuerto) return;
+        estaMuerto = true;
+
+        horizontalInput = Vector2.zero;
+        running = false;
+        isAttacking = false;
+
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            rb.isKinematic = true; // Evita que siga rebotando o siendo empujado
+        }
+
+        DisableWeaponTrigger();
+
+        if (TryGetComponent<Collider>(out var col))
+        {
+            col.enabled = false;
+        }
+
+        if (animator != null)
+        {
+            animator.SetTrigger("Die"); // Asegúrate de tener el trigger "Die" en el Animator Controller
+        }
     }
 
 }
