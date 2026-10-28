@@ -24,6 +24,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         ChangeState(GameState.Gameplay);
+        AudioManager.Instance.PlayMusic("MainMenuSong");
     }
 
     public void ChangeState(GameState newstate)
