@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc06e87d14a0958479872a5613fd94bd, type: 3}
-  m_Name: Walk
+  m_Name: ButtonClic
   m_EditorClassIdentifier: Assembly-CSharp::AudioData
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: 0c8a9ff8e61332348a3a2a8b50a2cc4e, type: 3}
   volume: 1
-  loop: 0
-  cooldown: 0
+  loop: 1
+  cooldown: 0.1
   priority: 5
   audioType: 0
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 8292212590195183377, guid: f26fbddbe19c05e428fc303c7998802c, type: 2}

@@ -94,6 +94,9 @@ public class OcultistasCtrl : MonoBehaviour
             Debug.Log($"{name} llego a {punto.name}");
 
         }
+
+        AudioManager.Instance.Play3D("EnemyLaught", transform.position);
+
         if (animator != null)
         {
             animator.SetFloat(ParamSpeed, 0f); // Regresa a Praying
@@ -111,6 +114,7 @@ public class OcultistasCtrl : MonoBehaviour
 
         if (other.CompareTag("Arma"))
         {
+            AudioManager.Instance.Play("HitEnemy");
             RecibirDano(1f);
         }
     }
@@ -131,6 +135,8 @@ public class OcultistasCtrl : MonoBehaviour
             }
 
             animator.SetBool(ParamIsHurt, true);
+
+            AudioManager.Instance.Play3D("EnemyHitted", transform.position);
             Invoke(nameof(FinAnimacionGolpe), 0.4f);
         }
     }
@@ -148,6 +154,7 @@ public class OcultistasCtrl : MonoBehaviour
         {
             agente.isStopped = true;
         }
+        AudioManager.Instance.Play3D("EnemyDeath", transform.position);
 
         Destroy(gameObject, 3f);
     }

@@ -10,12 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc06e87d14a0958479872a5613fd94bd, type: 3}
-  m_Name: Pray
+  m_Name: EnemyDeath
   m_EditorClassIdentifier: Assembly-CSharp::AudioData
-  clips: []
-  volume: 1
+  clips:
+  - {fileID: 8300000, guid: 9dbb035bef115ce478e8c446a33ca709, type: 3}
+  volume: 0.75
   loop: 0
-  cooldown: 0
-  priority: 5
+  cooldown: 0.2
+  priority: 8
   audioType: 0
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 8292212590195183377, guid: f26fbddbe19c05e428fc303c7998802c, type: 2}

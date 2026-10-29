@@ -18,7 +18,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowScreen(string screenName)
     {
-        AudioManager.Instance.Play("UIConfirmation");
+        AudioManager.Instance.Play("ButtonClic");
 
         BaseUIPanel panel = screens.Find(i => i.PanelName == screenName);
 
@@ -59,7 +59,7 @@ public class UIManager : MonoBehaviour
 
     public void HideScreen()
     {
-        AudioManager.Instance.Play("UIBack");
+        AudioManager.Instance.Play("ButtonClic");
 
         if (screenTransition) return;
 
@@ -82,7 +82,7 @@ public class UIManager : MonoBehaviour
 
     public void OpenOverlay(string overlayName)
     {
-        AudioManager.Instance.Play("UIConfirmation");
+        AudioManager.Instance.Play("ButtonClic");
 
         BaseUIPanel panel = overlays.Find(i => i.PanelName == overlayName);
 
@@ -102,7 +102,7 @@ public class UIManager : MonoBehaviour
 
     public void CloseOverlay(string overlayName)
     {
-        AudioManager.Instance.Play("UIBack");
+        AudioManager.Instance.Play("ButtonClic");
 
         BaseUIPanel panel = activeOverlays.Find(i => i.PanelName == overlayName);
 
@@ -130,7 +130,7 @@ public class UIManager : MonoBehaviour
 
     public void CloseAllOverlays()
     {
-        AudioManager.Instance.Play("UIBack");
+        AudioManager.Instance.Play("ButtonClic");
         foreach (BaseUIPanel panel in activeOverlays.ToArray())
         {
             if (panel)

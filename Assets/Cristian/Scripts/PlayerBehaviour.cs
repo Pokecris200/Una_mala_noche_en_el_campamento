@@ -171,6 +171,8 @@ public class PlayerBehaviour : MonoBehaviour
                 }
             }
 
+            AudioManager.Instance.Play3D("Swing", transform.position);
+
             isAttacking = true;
         }
     }

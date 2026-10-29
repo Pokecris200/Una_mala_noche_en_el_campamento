@@ -10,12 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: dc06e87d14a0958479872a5613fd94bd, type: 3}
-  m_Name: Slash
+  m_Name: Swing
   m_EditorClassIdentifier: Assembly-CSharp::AudioData
-  clips: []
+  clips:
+  - {fileID: 8300000, guid: a30c997245851a547838b25dd1056157, type: 3}
+  - {fileID: 8300000, guid: 32af5373106a1ef4ea91f79f439f976a, type: 3}
   volume: 1
   loop: 0
-  cooldown: 0
+  cooldown: 0.2
   priority: 5
   audioType: 0
-  mixerGroup: {fileID: 0}
+  mixerGroup: {fileID: 8292212590195183377, guid: f26fbddbe19c05e428fc303c7998802c, type: 2}
